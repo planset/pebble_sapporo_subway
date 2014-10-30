@@ -5,7 +5,7 @@
 /*
  * APIのURL
  */
-var API_HOST = 'http://dkpyn.com/pebble';
+var API_HOST = 'http://sapporo-subway-webapi.herokuapp.com';
 
 /*
  * 緯度経度取得のタイムアウト用タイマーのId
