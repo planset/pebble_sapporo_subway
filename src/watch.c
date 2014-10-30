@@ -4,15 +4,10 @@
 static TextLayer *text_date_layer;
 static TextLayer *text_time_layer;
 
-
-static struct WatchUi {
-    TextLayer *text_date_layer;
-    TextLayer *text_time_layer;
-    char time_text[5];
-    char date_text[9];
-} ui;
-
-TextLayer* _create_time_layer(int left, int top) {
+/*
+ * 時刻を表示するレイヤーを返す
+ */
+static TextLayer *_create_time_layer(int left, int top) {
     TextLayer *layer;
 
     layer = text_layer_create(GRect(left, top, 144-left, 52));
@@ -23,7 +18,10 @@ TextLayer* _create_time_layer(int left, int top) {
     return layer;
 }
 
-TextLayer* _create_date_layer(int left, int top) {
+/*
+ * 日付を表示するレイヤーを返す
+ */
+static TextLayer *_create_date_layer(int left, int top) {
     TextLayer *layer;
 
     layer = text_layer_create(GRect(left, top, 144-left, 28));
@@ -34,7 +32,10 @@ TextLayer* _create_date_layer(int left, int top) {
     return layer;
 }
 
-void _update_time(TextLayer *layer, struct tm *tick_time) {
+/*
+ * 時刻を更新する
+ */
+static void _update_time(TextLayer *layer, struct tm *tick_time) {
   static char time_text[] = "00:00";
   char *time_format;
 
@@ -55,20 +56,28 @@ void _update_time(TextLayer *layer, struct tm *tick_time) {
   text_layer_set_text(layer, time_text);
 }
 
-void _update_date(TextLayer *layer, struct tm *tick_time) {
+/*
+ * 日付を更新する
+ */
+static void _update_date(TextLayer *layer, struct tm *tick_time) {
     static char date_text[] = "00/00 Xxxxxxx";
 
     strftime(date_text, sizeof(date_text), "%m/%e %a", tick_time);
     text_layer_set_text(layer, date_text);
 }
 
+/*
+ * tick timerコールバック
+ */
 static void _tick_timer_handler(struct tm *tick_time, TimeUnits units_changed) {
     _update_time(text_time_layer, tick_time);
     _update_date(text_date_layer, tick_time);
 }
 
-/* 初回の描画 */
-void _initialize_layer_text(){
+/*
+ * 初回の描画 
+ */
+static void _initialize_layer_text(){
     time_t t;
     time(&t);
     struct tm *tick_time = localtime(&t);
@@ -76,8 +85,9 @@ void _initialize_layer_text(){
     _update_time(text_time_layer, tick_time);
 }
 
-
-/* windows load  */
+/*
+ * windowが読み込まれた時に呼ばれるレイヤ初期化処理
+ */
 void watch_layer_load(Layer *window_layer) {
 
     // 時刻表示
@@ -94,13 +104,17 @@ void watch_layer_load(Layer *window_layer) {
     _initialize_layer_text();
 }
 
-/* windows unload  */
+/*
+ * window unload
+ */
 void watch_layer_unload(Window *window) {
     text_layer_destroy(text_time_layer);
     text_layer_destroy(text_date_layer);
 }
 
-/* app deinit */
+/*
+ * deinit
+ */
 void watch_layer_deinit() {
     tick_timer_service_unsubscribe();
 }

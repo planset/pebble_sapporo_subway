@@ -6,30 +6,39 @@
 #include "watch.h"
 
 #include "info_layer.h"
-#include "info_layer_state.h"
-//#include "info_layer_message.h"
 #include "info_layer_station.h"
 
+/*
+ * main window
+ */
 static Window *window;
 
-// 情報表示レイヤ
+/*
+ * 情報表示レイヤ
+ */
 static IInfoLayer *info_layer = NULL;
 
-// 情報表示レイヤの生成処理を追加する
+/*
+ * 情報表示レイヤの生成処理を追加する
+ */
 static IInfoLayer *(*info_layers_create[])() = {
-    StateLayer_Create,
-    //MessageLayer_Create,
     StationLayer_Create
 };
 
-// 現在表示している情報表示レイヤのインデックス
+/*
+ * 現在表示している情報表示レイヤのインデックス
+ */
 static int info_layer_index = 0;
 
-// 登録した情報表示レイヤの数
+/*
+ * 登録した情報表示レイヤの数
+ */
 static int info_layers_len;
 
-// 使用できる情報表示レイヤの配列
-// info_layers_createの長さ分info_layersに領域を確保して使う
+/*
+ * 使用できる情報表示レイヤの配列
+ * info_layers_createの長さ分info_layersに領域を確保して使う
+ */
 static IInfoLayer * (*info_layers);
 
 
@@ -99,9 +108,6 @@ static void window_load(Window *window) {
     // 
     // 情報表示部：0, 79, 144, 90
     // 
-
-    // 情報表示用レイヤを生成する。
-    // TODO: 表示する時に生成する方がよいかも
     info_layers_len = sizeof(info_layers_create) / sizeof(info_layers_create[0]);
     info_layers = (IInfoLayer **)malloc(sizeof(IInfoLayer *) * info_layers_len);
     for (int i=0; i<info_layers_len; i++) {
@@ -118,11 +124,9 @@ static void window_load(Window *window) {
 
 }
 
-
-
-/* 
- * unload: called when the window is deinited, but could be used in the future to free resources bound to windows that are not on screen.
- * */
+/*
+ * window unload
+ */
 static void window_unload(Window *window) {
     APP_LOG(APP_LOG_LEVEL_DEBUG, "unload");
 
@@ -131,6 +135,9 @@ static void window_unload(Window *window) {
 }
 
 
+/*
+ * application initialize
+ */
 static void init(void) {
     APP_LOG(APP_LOG_LEVEL_DEBUG, "init");
 
@@ -149,6 +156,9 @@ static void init(void) {
     window_stack_push(window, animated);
 }
 
+/*
+ * deinit
+ */
 static void deinit(void) {
     APP_LOG(APP_LOG_LEVEL_DEBUG, "deinit");
 
@@ -157,6 +167,9 @@ static void deinit(void) {
     window_destroy(window);
 }
 
+/*
+ * main
+ */
 int main(void) {
     init();
     app_event_loop();

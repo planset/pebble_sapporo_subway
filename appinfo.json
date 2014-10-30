@@ -1,17 +1,16 @@
 {
-  "uuid": "ed782d0c-5ad0-42f3-9b53-ae6df451fc89",
-  "shortName": "pebble-planset",
-  "longName": "pebble-planset",
+  "uuid": "7A46BF07-0E22-42CB-AD43-64F49B4E0386",
+  "shortName": "sapporo_subway",
+  "longName": "sapporo_subway",
   "companyName": "dkpyn.com",
   "versionCode": 1,
-  "versionLabel": "1.0.0",
+  "versionLabel": "1.0",
   "capabilities": ["configurable"],
   "watchapp": {
-    "watchface": true
+    "watchface": false
   },
   "appKeys": {
     "command": 0,
-    "message": 10,
     "stationInfoName": 20,
     "stationInfoDir1": 21,
     "stationInfoDir2": 22,

@@ -4,17 +4,39 @@
 #include "message.h"
 #include "info_layer_station.h"
 
-// メインのレイヤー　これにのせたい情報をのせる。
+/*
+ * 駅情報を載せるレイヤ
+ */
 static Layer *info_layer;
 
-// メッセージ表示用レイヤ
+/*
+ * 近くの駅名を表示する
+ */
 static TextLayer *text_station_name_layer;
+
+/*
+ * 「栄町」を表示する
+ */
 static TextLayer *text_station_direction_1_layer;
+
+/*
+ * 栄町行きの次の発車時刻を表示する
+ */
 static TextLayer *text_station_direction_2_layer;
+
+/*
+ * 「福住」を表示する
+ */
 static TextLayer *text_station_direction_1_departure_layer;
+
+/*
+ * 福住行きの次の発車時刻を表示する
+ */
 static TextLayer *text_station_direction_2_departure_layer;
 
-// 
+/*
+ * JS側から駅情報を受け取った時の処理
+ */
 static void received_station(DictionaryIterator *received, void *context) {
     APP_LOG(APP_LOG_LEVEL_DEBUG, "received_station");
 
@@ -46,7 +68,9 @@ static void received_station(DictionaryIterator *received, void *context) {
 
 }
 
-
+/*
+ * ヘルパ関数：GRectからテキストレイヤを作成して返す
+ */
 static TextLayer *create_my_text_layer(GRect grect) {
     TextLayer *tl = text_layer_create(grect);
     //text_layer_set_overflow_mode(tl, GTextOverflowModeWordWrap);
@@ -55,7 +79,9 @@ static TextLayer *create_my_text_layer(GRect grect) {
     return tl;
 }
 
-/* windows load  */
+/*
+ * windowがロードされた際に呼び出されるレイヤの初期化処理
+ */
 static void info_layer_station_load(Layer *window_layer) {
     APP_LOG(APP_LOG_LEVEL_DEBUG, "info_layer_station_load");
 
@@ -119,15 +145,23 @@ static void info_layer_station_unload(Window *window) {
     layer_destroy(info_layer);
 }
 
-/* app deinit */
+/*
+ * deinit
+ */
 static void info_layer_station_deinit() {
     APP_LOG(APP_LOG_LEVEL_DEBUG, "info_layer_station_deinit");
 }
 
+/*
+ * return info_layer
+ */
 static Layer *info_layer_station_get_layer() {
     return info_layer;
 }
 
+/*
+ * info_layerの構造体
+ */
 static IInfoLayer info_layer_station = {
     info_layer_station_load,      /* load */
     info_layer_station_unload,    /* unload */
@@ -135,6 +169,9 @@ static IInfoLayer info_layer_station = {
     info_layer_station_get_layer  /* get_layer */
 };
 
+/*
+ * return info_layer_station
+ */
 IInfoLayer *StationLayer_Create() {
     return &info_layer_station;
 }

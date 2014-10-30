@@ -3,6 +3,9 @@
 #include "common.h"
 #include "message.h"
 
+/*
+ * メッセージ送信
+ */
 void send_cmd(int command_id, TextLayer *error_text_layer) {
     Tuplet value = TupletInteger(COMMAND_KEY, command_id);
 
