@@ -13,7 +13,8 @@ static TextLayer *_create_time_layer() {
     layer = text_layer_create(GRect(4, 0, 144-4, 52));
     text_layer_set_text_color(layer, GColorWhite);
     text_layer_set_background_color(layer, GColorClear);
-    text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
+    //text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
+    text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_ROBOTO_BOLD_SUBSET_49));
 
     return layer;
 }
