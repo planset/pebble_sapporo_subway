@@ -99,9 +99,6 @@ static TextLayer *create_my_text_layer(GRect grect) {
 void station_layer_load(Layer *window_layer) {
     APP_LOG(APP_LOG_LEVEL_DEBUG, "station_layer_load");
 
-    //
-    static bool is_registered_callback = false;
-
     station_layer = layer_create(GRect(INFO_LAYER_LEFT, INFO_LAYER_TOP,
                                        INFO_LAYER_WIDTH, INFO_LAYER_HEIGHT));
     layer_add_child(window_layer, station_layer);
@@ -114,32 +111,26 @@ void station_layer_load(Layer *window_layer) {
     layer_add_child(station_layer, text_layer_get_layer(text_station_name_layer));
 
     text_station_direction_1_layer = create_my_text_layer(GRect(0+2, 30+2, 90, 30));
-    //text_layer_set_overflow_mode(text_station_direction_1_layer, GTextOverflowModeWordWrap);
     text_layer_set_font(text_station_direction_1_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
     layer_add_child(station_layer, text_layer_get_layer(text_station_direction_1_layer));
 
-    text_station_direction_1_departure_layer = create_my_text_layer(
-            GRect(0+2+90-5, 30, 50, 30));
     text_layer_set_font(text_station_direction_1_departure_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+    text_station_direction_1_departure_layer = create_my_text_layer(GRect(0+2+90-5, 30, 50, 30));
     layer_add_child(station_layer, text_layer_get_layer(text_station_direction_1_departure_layer));
 
     text_station_direction_2_layer = create_my_text_layer(GRect(0+2, 60+2, 90, 30));
     text_layer_set_font(text_station_direction_2_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
     layer_add_child(station_layer, text_layer_get_layer(text_station_direction_2_layer));
 
-    text_station_direction_2_departure_layer = create_my_text_layer(
-            GRect(0+2+90-5, 60, 50, 30));
     text_layer_set_font(text_station_direction_2_departure_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+    text_station_direction_2_departure_layer = create_my_text_layer(GRect(0+2+90-5, 60, 50, 30));
     layer_add_child(station_layer, text_layer_get_layer(text_station_direction_2_departure_layer));
 
     // メッセージの受信設定
-    if (is_registered_callback == false) {
-        const int inbound_size = 124;
-        const int outbound_size = 124;
-        app_message_open(inbound_size, outbound_size);
-        app_message_register_inbox_received(received_station);
-        is_registered_callback = true;
-    }
+    const int inbound_size = 124;
+    const int outbound_size = 124;
+    app_message_open(inbound_size, outbound_size);
+    app_message_register_inbox_received(received_station);
 
     get_station_information();
 }
@@ -150,13 +141,12 @@ void station_layer_unload(Window *window) {
 
     send_cmd(STOP_CHECK_STATION, text_station_direction_1_departure_layer);
     
-    //app_station_deregister_callbacks();
-
     text_layer_destroy(text_station_name_layer);
     text_layer_destroy(text_station_direction_1_layer);
     text_layer_destroy(text_station_direction_2_layer);
     text_layer_destroy(text_station_direction_1_departure_layer);
     text_layer_destroy(text_station_direction_2_departure_layer);
+
     layer_destroy(station_layer);
 }
 

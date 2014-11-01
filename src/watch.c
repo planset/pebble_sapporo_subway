@@ -7,10 +7,10 @@ static TextLayer *text_time_layer;
 /*
  * 時刻を表示するレイヤーを返す
  */
-static TextLayer *_create_time_layer(int left, int top) {
+static TextLayer *_create_time_layer() {
     TextLayer *layer;
 
-    layer = text_layer_create(GRect(left, top, 144-left, 52));
+    layer = text_layer_create(GRect(4, 0, 144-4, 52));
     text_layer_set_text_color(layer, GColorWhite);
     text_layer_set_background_color(layer, GColorClear);
     text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
@@ -21,10 +21,10 @@ static TextLayer *_create_time_layer(int left, int top) {
 /*
  * 日付を表示するレイヤーを返す
  */
-static TextLayer *_create_date_layer(int left, int top) {
+static TextLayer *_create_date_layer() {
     TextLayer *layer;
 
-    layer = text_layer_create(GRect(left, top, 144-left, 28));
+    layer = text_layer_create(GRect(8, 54, 144-8, 28));
     text_layer_set_text_color(layer, GColorWhite);
     text_layer_set_background_color(layer, GColorClear);
     text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
@@ -91,11 +91,11 @@ static void _initialize_layer_text(){
 void watch_layer_load(Layer *window_layer) {
 
     // 時刻表示
-    text_time_layer = _create_time_layer(4, 0);
+    text_time_layer = _create_time_layer();
     layer_add_child(window_layer, text_layer_get_layer(text_time_layer));
 
-    // 日付表示 78-24=54
-    text_date_layer = _create_date_layer(8, 54);
+    // 日付表示
+    text_date_layer = _create_date_layer();
     layer_add_child(window_layer, text_layer_get_layer(text_date_layer));
 
     // 時刻、日付更新Callback
@@ -108,6 +108,7 @@ void watch_layer_load(Layer *window_layer) {
  * window unload
  */
 void watch_layer_unload(Window *window) {
+    tick_timer_service_unsubscribe();
     text_layer_destroy(text_time_layer);
     text_layer_destroy(text_date_layer);
 }
@@ -116,6 +117,6 @@ void watch_layer_unload(Window *window) {
  * deinit
  */
 void watch_layer_deinit() {
-    tick_timer_service_unsubscribe();
+
 }
 
