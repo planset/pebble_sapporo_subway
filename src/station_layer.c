@@ -114,16 +114,16 @@ void station_layer_load(Layer *window_layer) {
     text_layer_set_font(text_station_direction_1_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
     layer_add_child(station_layer, text_layer_get_layer(text_station_direction_1_layer));
 
-    text_layer_set_font(text_station_direction_1_departure_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
     text_station_direction_1_departure_layer = create_my_text_layer(GRect(0+2+90-5, 30, 50, 30));
+    text_layer_set_font(text_station_direction_1_departure_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
     layer_add_child(station_layer, text_layer_get_layer(text_station_direction_1_departure_layer));
 
     text_station_direction_2_layer = create_my_text_layer(GRect(0+2, 60+2, 90, 30));
     text_layer_set_font(text_station_direction_2_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
     layer_add_child(station_layer, text_layer_get_layer(text_station_direction_2_layer));
 
-    text_layer_set_font(text_station_direction_2_departure_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
     text_station_direction_2_departure_layer = create_my_text_layer(GRect(0+2+90-5, 60, 50, 30));
+    text_layer_set_font(text_station_direction_2_departure_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
     layer_add_child(station_layer, text_layer_get_layer(text_station_direction_2_departure_layer));
 
     // メッセージの受信設定
