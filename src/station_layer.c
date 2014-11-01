@@ -35,6 +35,21 @@ static TextLayer *text_station_direction_1_departure_layer;
 static TextLayer *text_station_direction_2_departure_layer;
 
 /*
+ * 駅情報取得を開始する
+ */
+static void get_station_information() {
+    // Update text layers
+    text_layer_set_text(text_station_name_layer, "情報取得中...");
+    text_layer_set_text(text_station_direction_1_layer, "");
+    text_layer_set_text(text_station_direction_2_layer, "");
+    text_layer_set_text(text_station_direction_1_departure_layer, "");
+    text_layer_set_text(text_station_direction_2_departure_layer, "");
+    
+    // send message
+    send_cmd(START_CHECK_STATION, text_station_direction_1_departure_layer);
+}
+
+/*
  * JS側から駅情報を受け取った時の処理
  */
 static void received_station(DictionaryIterator *received, void *context) {
@@ -73,7 +88,6 @@ static void received_station(DictionaryIterator *received, void *context) {
  */
 static TextLayer *create_my_text_layer(GRect grect) {
     TextLayer *tl = text_layer_create(grect);
-    //text_layer_set_overflow_mode(tl, GTextOverflowModeWordWrap);
     text_layer_set_text_color(tl, GColorWhite);
     text_layer_set_background_color(tl, GColorClear);
     return tl;
@@ -127,8 +141,7 @@ void station_layer_load(Layer *window_layer) {
         is_registered_callback = true;
     }
 
-    // メッセージ受信の開始
-    send_cmd(START_CHECK_STATION, text_station_direction_1_departure_layer);
+    get_station_information();
 }
 
 /* windows unload  */
@@ -158,6 +171,5 @@ void station_layer_deinit() {
  * 駅情報更新
  */
 void station_layer_update() {
-    // メッセージ受信の開始
-    send_cmd(START_CHECK_STATION, text_station_direction_1_departure_layer);
+    get_station_information();
 }
