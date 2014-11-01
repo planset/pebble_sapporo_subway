@@ -13,7 +13,7 @@ static TextLayer *_create_time_layer(int left, int top) {
     layer = text_layer_create(GRect(left, top, 144-left, 52));
     text_layer_set_text_color(layer, GColorWhite);
     text_layer_set_background_color(layer, GColorClear);
-    text_layer_set_font(layer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_TIME_48)));
+    text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
 
     return layer;
 }
@@ -27,7 +27,7 @@ static TextLayer *_create_date_layer(int left, int top) {
     layer = text_layer_create(GRect(left, top, 144-left, 28));
     text_layer_set_text_color(layer, GColorWhite);
     text_layer_set_background_color(layer, GColorClear);
-    text_layer_set_font(layer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_DATE_24)));
+    text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
 
     return layer;
 }

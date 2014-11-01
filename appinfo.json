@@ -23,37 +23,6 @@
         "type": "png",
         "name": "IMAGE_MENU_ICON",
         "file": "images/menu_icon.png"
-      },
-      {
-        "type": "png",
-        "name": "BATTERY_ICON",
-        "file": "images/battery_icon.png"
-      },
-      {
-        "type": "font",
-        "name": "FONT_MESSAGE_20",
-        "file": "fonts/ipag.ttf"
-      },
-      {
-        "type": "font",
-        "name": "FONT_STATION_20",
-        "file": "fonts/ipag.ttf"
-      },
-      {
-        "type": "font",
-        "name": "FONT_STATION_16",
-        "file": "fonts/ipag.ttf"
-      },
-      {
-        "type": "font",
-        "name": "FONT_DATE_24",
-        "file": "fonts/Consolas.ttf"
-      },
-      {
-        "characterRegex": "[:0-9]",
-        "type": "font",
-        "name": "FONT_TIME_48",
-        "file": "fonts/Consolas Bold.ttf"
       }
     ]
   }
