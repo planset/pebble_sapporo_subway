@@ -94,12 +94,12 @@ static void info_layer_station_load(Layer *window_layer) {
     // height: 90px
     // margin: 0 2px 0 2px;
     text_station_name_layer = create_my_text_layer(GRect(0+2, 0+5, 144-2, 30));
-    text_layer_set_font(text_station_name_layer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_STATION_20)));
+    text_layer_set_font(text_station_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
     layer_add_child(info_layer, text_layer_get_layer(text_station_name_layer));
 
     text_station_direction_1_layer = create_my_text_layer(GRect(0+2, 30+2, 90, 30));
     //text_layer_set_overflow_mode(text_station_direction_1_layer, GTextOverflowModeWordWrap);
-    text_layer_set_font(text_station_direction_1_layer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_STATION_16)));
+    text_layer_set_font(text_station_direction_1_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
     layer_add_child(info_layer, text_layer_get_layer(text_station_direction_1_layer));
 
     text_station_direction_1_departure_layer = create_my_text_layer(
@@ -108,7 +108,7 @@ static void info_layer_station_load(Layer *window_layer) {
     layer_add_child(info_layer, text_layer_get_layer(text_station_direction_1_departure_layer));
 
     text_station_direction_2_layer = create_my_text_layer(GRect(0+2, 60+2, 90, 30));
-    text_layer_set_font(text_station_direction_2_layer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_STATION_16)));
+    text_layer_set_font(text_station_direction_2_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
     layer_add_child(info_layer, text_layer_get_layer(text_station_direction_2_layer));
 
     text_station_direction_2_departure_layer = create_my_text_layer(
