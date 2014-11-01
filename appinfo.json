@@ -1,11 +1,10 @@
 {
   "uuid": "7A46BF07-0E22-42CB-AD43-64F49B4E0386",
-  "shortName": "sapporo_subway",
-  "longName": "sapporo_subway",
+  "shortName": "SapoSub",
+  "longName": "Sapporo Subway",
   "companyName": "dkpyn.com",
   "versionCode": 1,
   "versionLabel": "1.0",
-  "capabilities": ["configurable"],
   "watchapp": {
     "watchface": false
   },
